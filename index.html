@@ -1,0 +1,588 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#070b16">
+<title>مُزخرف — تزيين الكتابات والملصقات والرموز</title>
+<style>
+:root{--bg:#070b16;--bg2:#0d1426;--card:rgba(255,255,255,.055);--card2:rgba(255,255,255,.09);--stroke:rgba(255,255,255,.10);--stroke2:rgba(255,255,255,.18);--txt:#eef2ff;--muted:#9aa6c4;--accent:#7c5cff;--accent2:#22d3ee;--accent3:#f472b6;--shadow:0 18px 50px -18px rgba(0,0,0,.75);--glow:0 0 0 1px rgba(124,92,255,.35),0 12px 40px -12px rgba(124,92,255,.55);--radius:20px}
+html[data-theme=light]{--bg:#eef1fb;--bg2:#f7f9ff;--card:rgba(255,255,255,.72);--card2:rgba(255,255,255,.92);--stroke:rgba(16,24,48,.09);--stroke2:rgba(16,24,48,.16);--txt:#101a33;--muted:#5b6785;--accent:#6d4bff;--accent2:#0891b2;--accent3:#db2777;--shadow:0 18px 45px -20px rgba(30,45,90,.35);--glow:0 0 0 1px rgba(109,75,255,.25),0 12px 34px -14px rgba(109,75,255,.4)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{font-family:system-ui,-apple-system,"Segoe UI",Tahoma,"Noto Kufi Arabic","Noto Sans Arabic",Arial,sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;overflow-x:hidden;transition:background .45s,color .35s;padding-bottom:96px}
+body::before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;background:radial-gradient(60vw 60vw at 88% -8%,rgba(124,92,255,.30),transparent 62%),radial-gradient(52vw 52vw at 4% 8%,rgba(34,211,238,.20),transparent 60%),radial-gradient(60vw 60vw at 50% 108%,rgba(244,114,182,.18),transparent 62%),linear-gradient(180deg,var(--bg),var(--bg2));transition:background .45s}
+body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.35;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(circle at 50% 0%,#000,transparent 78%);-webkit-mask-image:radial-gradient(circle at 50% 0%,#000,transparent 78%)}
+html[data-theme=light] body::after{opacity:.5;background-image:linear-gradient(rgba(16,24,48,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(16,24,48,.05) 1px,transparent 1px)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 18px}
+.topbar{position:sticky;top:0;z-index:60;backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);background:linear-gradient(180deg,rgba(7,11,22,.82),rgba(7,11,22,.45));border-bottom:1px solid var(--stroke)}
+html[data-theme=light] .topbar{background:linear-gradient(180deg,rgba(255,255,255,.85),rgba(255,255,255,.55))}
+.topbar-in{display:flex;align-items:center;gap:14px;height:66px}
+.brand{display:flex;align-items:center;gap:11px;font-weight:800;font-size:19px}
+.logo{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;font-size:19px;background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:0 8px 22px -8px var(--accent);color:#fff}
+.brand small{display:block;font-size:11px;font-weight:600;color:var(--muted)}
+.spacer{flex:1}
+.icon-btn{width:42px;height:42px;border-radius:13px;border:1px solid var(--stroke);background:var(--card);color:var(--txt);font-size:18px;cursor:pointer;display:grid;place-items:center;transition:.25s}
+.icon-btn:hover{background:var(--card2);transform:translateY(-2px);border-color:var(--stroke2)}
+.icon-btn:active{transform:scale(.94)}
+.tabs{display:flex;gap:8px;padding:16px 0 6px;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;display:flex;align-items:center;gap:8px;padding:11px 18px;border-radius:14px;cursor:pointer;border:1px solid var(--stroke);background:var(--card);color:var(--muted);font-weight:700;font-size:14.5px;transition:.28s cubic-bezier(.2,.8,.2,1);white-space:nowrap;font-family:inherit}
+.tab:hover{color:var(--txt);border-color:var(--stroke2);transform:translateY(-1px)}
+.tab.active{color:#fff;border-color:transparent;background:linear-gradient(135deg,var(--accent),#5b8cff 55%,var(--accent2));box-shadow:0 12px 30px -12px var(--accent)}
+.panel{display:none;animation:fade .45s cubic-bezier(.2,.8,.2,1)}
+.panel.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.hero{padding:26px 0 18px}
+.hero h1{margin:0 0 8px;font-size:clamp(24px,4.4vw,38px);line-height:1.25;font-weight:900;letter-spacing:-.4px}
+.hero h1 span{background:linear-gradient(100deg,var(--accent),var(--accent2) 55%,var(--accent3));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{margin:0;color:var(--muted);font-size:15px;line-height:1.8;max-width:640px}
+.card{background:var(--card);border:1px solid var(--stroke);border-radius:var(--radius);box-shadow:var(--shadow);backdrop-filter:blur(20px) saturate(150%);-webkit-backdrop-filter:blur(20px) saturate(150%)}
+.input-card{padding:16px;margin-bottom:20px}
+textarea,input[type=text],input[type=number],select{width:100%;font-family:inherit;font-size:16px;color:var(--txt);background:rgba(0,0,0,.18);border:1px solid var(--stroke);border-radius:14px;padding:14px 16px;outline:none;transition:.25s;resize:vertical}
+html[data-theme=light] textarea,html[data-theme=light] input[type=text],html[data-theme=light] input[type=number],html[data-theme=light] select{background:rgba(255,255,255,.85)}
+textarea:focus,input:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 4px rgba(124,92,255,.16)}
+::placeholder{color:var(--muted);opacity:.85}
+input[type=number]{text-align:right;font-variant-numeric:tabular-nums}
+select{appearance:none;-webkit-appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--muted) 50%),linear-gradient(135deg,var(--muted) 50%,transparent 50%);background-position:calc(0% + 18px) calc(50% + 1px),calc(0% + 23px) calc(50% + 1px);background-size:5px 5px,5px 5px;background-repeat:no-repeat;padding-left:40px}
+textarea::-webkit-scrollbar{width:9px}
+textarea::-webkit-scrollbar-track{background:transparent}
+textarea::-webkit-scrollbar-thumb{background:rgba(124,92,255,.45);border-radius:99px}
+textarea{min-height:92px;line-height:1.7}
+.hint{font-size:12.5px;line-height:1.7;color:var(--muted);margin-top:10px;padding:9px 12px;border-radius:11px;background:rgba(124,92,255,.10);border:1px solid rgba(124,92,255,.22)}
+.quick{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.chip{padding:8px 14px;border-radius:999px;border:1px solid var(--stroke2);background:var(--card2);color:var(--txt);font-size:13px;font-weight:800;cursor:pointer;transition:.22s;white-space:nowrap;font-family:inherit;opacity:.92}
+.chip:hover{color:var(--txt);border-color:var(--accent);transform:translateY(-1px)}
+.chip.active{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border-color:transparent;box-shadow:0 8px 20px -10px var(--accent);opacity:1}
+.styles-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.style-card{padding:14px 16px;display:flex;flex-direction:column;gap:10px;transition:.3s;position:relative;overflow:hidden}
+.style-card::after{content:"";position:absolute;inset:0;border-radius:var(--radius);pointer-events:none;background:linear-gradient(135deg,rgba(124,92,255,.10),transparent 45%);opacity:0;transition:.3s}
+.style-card:hover{transform:translateY(-3px);border-color:var(--stroke2);box-shadow:var(--glow)}
+.style-card:hover::after{opacity:1}
+.style-name{font-size:12px;font-weight:800;color:var(--muted);display:flex;align-items:center;gap:6px}
+.style-name b{color:var(--accent2)}
+.tag-lat{font-size:10px;font-weight:800;padding:2px 7px;border-radius:6px;color:#fbbf24;background:rgba(251,191,36,.14);border:1px solid rgba(251,191,36,.3);margin-inline-start:auto}
+.style-preview{font-size:19px;line-height:1.75;word-break:break-word;min-height:34px;color:var(--txt);padding:8px 10px;border-radius:12px;background:rgba(0,0,0,.16);border:1px dashed var(--stroke)}
+html[data-theme=light] .style-preview{background:rgba(255,255,255,.7)}
+.copy-btn{border:none;border-radius:11px;padding:9px 18px;font-family:inherit;font-weight:800;font-size:13px;cursor:pointer;color:#fff;background:linear-gradient(135deg,var(--accent),var(--accent2));transition:.22s;align-self:flex-start;box-shadow:0 8px 20px -10px var(--accent)}
+.copy-btn:hover{filter:brightness(1.1);transform:translateY(-1px)}
+.copy-btn:active{transform:scale(.95)}
+.panel-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:22px 0 14px}
+.panel-head h2{margin:0;font-size:21px;font-weight:900}
+.badge{padding:5px 12px;border-radius:999px;font-size:12.5px;font-weight:800;color:#fff;background:linear-gradient(135deg,var(--accent),var(--accent3));box-shadow:0 8px 20px -10px var(--accent3)}
+.badge.soft{background:var(--card2);color:var(--muted);border:1px solid var(--stroke);box-shadow:none}
+.searchbar{position:relative;margin-bottom:12px}
+.searchbar input{padding-right:46px}
+.searchbar .s-ico{position:absolute;right:16px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:16px;pointer-events:none}
+.cats{display:flex;gap:8px;overflow-x:auto;padding:4px 0 14px;scrollbar-width:none}
+.cats::-webkit-scrollbar{display:none}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(74px,1fr));gap:10px}
+.grid.sym{grid-template-columns:repeat(auto-fill,minmax(62px,1fr))}
+.cell{aspect-ratio:1;display:grid;place-items:center;border-radius:15px;border:1px solid var(--stroke);background:var(--card);cursor:pointer;font-size:26px;transition:.2s cubic-bezier(.2,.8,.2,1);user-select:none;position:relative;overflow:hidden;padding:4px;text-align:center;line-height:1.1}
+.grid.sym .cell{font-size:23px}
+.cell:hover{transform:translateY(-3px) scale(1.06);border-color:var(--accent);background:var(--card2);box-shadow:var(--glow);z-index:2}
+.cell:active{transform:scale(.9)}
+.cell.copied{animation:pop .45s ease}
+@keyframes pop{0%{transform:scale(1)}40%{transform:scale(1.18);border-color:var(--accent2)}100%{transform:scale(1)}}
+.cell .kao{font-size:11px;line-height:1.15;word-break:break-all;padding:2px}
+.more-wrap{display:flex;justify-content:center;padding:22px 0 8px}
+.more-btn{padding:12px 26px;border-radius:14px;border:1px solid var(--stroke2);background:var(--card2);color:var(--txt);font-family:inherit;font-weight:800;font-size:14px;cursor:pointer;transition:.25s}
+.more-btn:hover{border-color:var(--accent);box-shadow:var(--glow)}
+.empty{text-align:center;padding:50px 20px;color:var(--muted);font-size:15px}
+.empty .big{font-size:44px;display:block;margin-bottom:10px;opacity:.7}
+.repeat-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
+.field{display:flex;flex-direction:column;gap:7px}
+.field label{font-size:12.5px;font-weight:800;color:var(--muted)}
+.out-box{position:relative}
+.out-box textarea{min-height:190px;font-size:15px;line-height:1.9;word-break:break-all;padding:16px 18px}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.btn{padding:12px 22px;border-radius:13px;border:none;font-family:inherit;font-weight:800;font-size:14px;cursor:pointer;transition:.25s}
+.btn.primary{color:#fff;background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:0 12px 28px -12px var(--accent)}
+.btn.ghost{background:var(--card2);color:var(--txt);border:1px solid var(--stroke2)}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.06)}
+.btn:active{transform:scale(.97)}
+.stat{display:flex;gap:18px;flex-wrap:wrap;margin-top:14px;font-size:13px;color:var(--muted);font-weight:700}
+.stat b{color:var(--accent2);font-size:15px}
+.toast{position:fixed;left:50%;bottom:110px;transform:translate(-50%,26px);z-index:200;padding:13px 24px;border-radius:15px;font-weight:800;font-size:14.5px;color:#fff;background:linear-gradient(135deg,#16a34a,#22d3ee);box-shadow:0 18px 40px -14px rgba(34,211,238,.7);opacity:0;pointer-events:none;transition:.35s cubic-bezier(.2,.8,.2,1);display:flex;align-items:center;gap:9px;max-width:88vw}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.toast.err{background:linear-gradient(135deg,#dc2626,#f97316);box-shadow:0 18px 40px -14px rgba(220,38,38,.7)}
+.bottomnav{display:none;position:fixed;left:0;right:0;bottom:0;z-index:80;padding:8px 10px calc(8px + env(safe-area-inset-bottom));background:linear-gradient(180deg,rgba(7,11,22,.55),rgba(7,11,22,.95));backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);border-top:1px solid var(--stroke)}
+html[data-theme=light] .bottomnav{background:linear-gradient(180deg,rgba(255,255,255,.6),rgba(255,255,255,.97))}
+.bn-in{display:flex;justify-content:space-around;align-items:center;max-width:520px;margin:0 auto}
+.bn{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:7px 4px;border-radius:13px;color:var(--muted);font-size:10.5px;font-weight:800;cursor:pointer;transition:.25s;border:none;background:none;font-family:inherit}
+.bn .ico{font-size:19px;line-height:1}
+.bn.active{color:var(--accent2);background:rgba(124,92,255,.14)}
+.bn.active .ico{transform:translateY(-2px);filter:drop-shadow(0 4px 10px rgba(34,211,238,.6))}
+@media(max-width:760px){.bottomnav{display:block}.tabs{display:none}body{padding-bottom:104px}.styles-grid{grid-template-columns:1fr}.repeat-grid{grid-template-columns:1fr}.grid{grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:8px}.grid.sym{grid-template-columns:repeat(auto-fill,minmax(54px,1fr))}.cell{font-size:23px;border-radius:13px}.grid.sym .cell{font-size:20px}.hero{padding:18px 0 12px}.quick{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}.quick::-webkit-scrollbar{display:none}.quick .chip{flex:0 0 auto}.toast{bottom:96px}.topbar-in{height:60px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="wrap topbar-in">
+  <div class="brand"><div class="logo">✦</div><div>مُزخرف<small>تزيين الكتابات · ملصقات · رموز</small></div></div>
+  <div class="spacer"></div>
+  <button class="icon-btn" id="themeBtn" aria-label="تبديل الوضع">🌙</button>
+</div></div>
+
+<div class="wrap">
+  <nav class="tabs" id="tabs">
+    <button class="tab active" data-tab="decor"><span>✍️</span> تزيين الكتابات</button>
+    <button class="tab" data-tab="stickers"><span>😻</span> الملصقات</button>
+    <button class="tab" data-tab="symbols"><span>✧</span> الرموز</button>
+    <button class="tab" data-tab="repeat"><span>🔁</span> التكرار</button>
+  </nav>
+
+  <section class="panel active" id="panel-decor">
+    <div class="hero"><h1>زيّن <span>كتاباتك</span> بلمسة واحدة</h1>
+      <p>اكتب أي نص، واختر من أكثر من ٧٥ نمطاً جاهزاً — خطوط يونيكود مزخرفة، إطارات، رموز، وخطوط عربية. اضغط «نسخ» واستخدمه في أي مكان.</p></div>
+    <div class="card input-card">
+      <textarea id="decorInput" placeholder="اكتب نصك هنا… مثال: محمد أو Hello World" maxlength="300">مُزخرف</textarea>
+      <div class="hint">💡 أنماط يونيكود (𝐁𝐨𝐥𝐝 / 𝓢𝓬𝓻𝓲𝓹𝓽 …) تعمل على الحروف اللاتينية والأرقام — أما النص العربي فيُزيَّن بالإطارات والرموز والتطويل والتشكيل.</div>
+      <div class="quick" id="quickChips">
+        <button class="chip" data-q="محمد">محمد</button><button class="chip" data-q="أحمد">أحمد</button>
+        <button class="chip" data-q="Hello">Hello</button><button class="chip" data-q="أحبك">أحبك</button>
+        <button class="chip" data-q="بغداد">بغداد</button><button class="chip" data-q="2026">2026</button>
+      </div>
+    </div>
+    <div class="styles-grid" id="stylesGrid"></div>
+  </section>
+
+  <section class="panel" id="panel-stickers">
+    <div class="panel-head"><h2>الملصقات</h2><span class="badge" id="stickerCount">1000</span><span class="badge soft" id="stickerShown">—</span></div>
+    <div class="searchbar"><span class="s-ico">🔍</span><input type="text" id="stickerSearch" placeholder="ابحث في الملصقات… (اسم التصنيف أو الرمز)"></div>
+    <div class="cats" id="stickerCats"></div>
+    <div class="grid" id="stickerGrid"></div>
+    <div class="more-wrap" id="stickerMoreWrap"></div>
+  </section>
+
+  <section class="panel" id="panel-symbols">
+    <div class="panel-head"><h2>الرموز</h2><span class="badge" id="symbolCount">1000</span><span class="badge soft" id="symbolShown">—</span></div>
+    <div class="searchbar"><span class="s-ico">🔍</span><input type="text" id="symbolSearch" placeholder="ابحث في الرموز… (اسم التصنيف أو الرمز)"></div>
+    <div class="cats" id="symbolCats"></div>
+    <div class="grid sym" id="symbolGrid"></div>
+    <div class="more-wrap" id="symbolMoreWrap"></div>
+  </section>
+
+  <section class="panel" id="panel-repeat">
+    <div class="hero"><h1>كرّر <span>بلا حدود</span></h1>
+      <p>اكتب كلمة أو إيموجي، وكرّره ٥٠٠ مرة بضغطة واحدة — مع خيار تعديل العدد وإضافة فاصل بين التكرارات.</p></div>
+    <div class="card input-card">
+      <div class="repeat-grid">
+        <div class="field"><label>النص أو الإيموجي</label><input type="text" id="repText" value="🔥" maxlength="40" placeholder="مثال: 🔥 أو أحبك"></div>
+        <div class="field"><label>عدد التكرارات</label><input type="number" id="repCount" value="500" min="1" max="5000" step="1"></div>
+        <div class="field"><label>الفاصل بين التكرارات</label>
+          <select id="repSep">
+            <option value="">بدون فاصل</option><option value=" ">مسافة</option><option value="\n">سطر جديد</option>
+            <option value=" · ">نقطة وسطى ·</option><option value=" | ">خط عمودي |</option>
+            <option value=" ✦ ">نجمة ✦</option><option value=" ❤ ">قلب ❤</option>
+          </select></div>
+        <div class="field"><label>خيارات سريعة</label>
+          <div class="quick" style="margin:0"><button class="chip" data-rep="100">100</button><button class="chip" data-rep="500">500</button><button class="chip" data-rep="1000">1000</button></div></div>
+      </div>
+      <div class="row">
+        <button class="btn primary" id="repGo">🔁 كرّر الآن</button>
+        <button class="btn ghost" id="repCopy">📋 نسخ الناتج</button>
+        <button class="btn ghost" id="repClear">مسح</button>
+      </div>
+      <div class="stat"><span>عدد الأحرف: <b id="repChars">0</b></span><span>عدد التكرارات: <b id="repTimes">0</b></span></div>
+      <div class="out-box" style="margin-top:14px"><textarea id="repOut" readonly placeholder="سيظهر الناتج هنا…"></textarea></div>
+    </div>
+  </section>
+</div>
+
+<nav class="bottomnav"><div class="bn-in" id="bnav">
+  <button class="bn active" data-tab="decor"><span class="ico">✍️</span>تزيين</button>
+  <button class="bn" data-tab="stickers"><span class="ico">😻</span>ملصقات</button>
+  <button class="bn" data-tab="symbols"><span class="ico">✧</span>رموز</button>
+  <button class="bn" data-tab="repeat"><span class="ico">🔁</span>تكرار</button>
+</div></nav>
+
+<div class="toast" id="toast"><span>✅</span><span id="toastMsg">تم النسخ</span></div>
+
+<script>
+/* ============ 1) THEME ============ */
+(function(){
+  var saved=localStorage.getItem('mz-theme');
+  var sys=(window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark';
+  document.documentElement.setAttribute('data-theme',saved||sys);
+  var btn=document.getElementById('themeBtn');
+  function sync(){btn.textContent=document.documentElement.getAttribute('data-theme')==='dark'?'🌙':'☀️';}
+  sync();
+  btn.addEventListener('click',function(){
+    var nx=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';
+    document.documentElement.setAttribute('data-theme',nx);
+    localStorage.setItem('mz-theme',nx); sync();
+  });
+})();
+
+/* ============ 2) TOAST ============ */
+var toastTimer=null;
+function toast(msg,err){
+  var el=document.getElementById('toast');
+  document.getElementById('toastMsg').textContent=msg||'تم النسخ';
+  el.classList.toggle('err',!!err);
+  el.querySelector('span').textContent=err?'⚠️':'✅';
+  el.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(function(){el.classList.remove('show');},1700);
+}
+
+/* ============ 3) COPY (iOS Safari + Android Chrome) ============ */
+function legacyCopy(text){
+  var ta=document.createElement('textarea');
+  ta.value=text; ta.setAttribute('readonly','');
+  ta.style.cssText='position:fixed;top:0;left:0;width:1px;height:1px;padding:0;border:0;opacity:0;font-size:16px;';
+  document.body.appendChild(ta);
+  var sel=document.getSelection(), prev=(sel&&sel.rangeCount>0)?sel.getRangeAt(0):null;
+  ta.focus(); ta.select(); ta.setSelectionRange(0,text.length);
+  var ok=false;
+  try{ok=document.execCommand('copy');}catch(e){ok=false;}
+  document.body.removeChild(ta);
+  if(prev&&sel){sel.removeAllRanges();sel.addRange(prev);}
+  return ok;
+}
+function copyText(text){
+  if(!text){toast('لا يوجد نص للنسخ',true);return;}
+  if(navigator.clipboard&&window.isSecureContext){
+    navigator.clipboard.writeText(text).then(function(){toast('تم النسخ');},function(){
+      if(legacyCopy(text))toast('تم النسخ'); else toast('تعذّر النسخ — انسخ يدوياً',true);
+    });
+    return;
+  }
+  if(legacyCopy(text))toast('تم النسخ'); else toast('تعذّر النسخ — انسخ يدوياً',true);
+}
+
+/* ============ 4) UNICODE MAPS ============ */
+function rangeMap(up,lo,dig){
+  var m={},i;
+  for(i=0;i<26;i++){m[String.fromCharCode(65+i)]=String.fromCodePoint(up+i);m[String.fromCharCode(97+i)]=String.fromCodePoint(lo+i);}
+  if(dig)for(i=0;i<10;i++)m[String(i)]=String.fromCodePoint(dig+i);
+  return m;
+}
+function ov(base,o){var k,r={};for(k in base)r[k]=base[k];for(k in o)r[k]=o[k];return r;}
+function tr(t,m){var out='',i;for(i=0;i<t.length;i++){var c=t[i];out+=(m[c]!==undefined?m[c]:c);}return out;}
+var M={};
+M.bold=rangeMap(0x1D400,0x1D41A,0x1D7CE);
+M.italic=ov(rangeMap(0x1D434,0x1D44E),{h:'ℎ'});
+M.boldItalic=rangeMap(0x1D468,0x1D482);
+M.script=ov(rangeMap(0x1D49C,0x1D4B6),{B:'ℬ',E:'ℰ',F:'ℱ',H:'ℋ',I:'ℐ',L:'ℒ',M:'ℳ',R:'ℛ',e:'ℯ',g:'ℊ',o:'ℴ'});
+M.boldScript=rangeMap(0x1D4D0,0x1D4EA);
+M.fraktur=ov(rangeMap(0x1D504,0x1D51E),{C:'ℭ',H:'ℌ',I:'ℑ',R:'ℜ',Z:'ℨ'});
+M.boldFraktur=rangeMap(0x1D56C,0x1D586);
+M.double=ov(rangeMap(0x1D538,0x1D552,0x1D7D8),{C:'ℂ',H:'ℍ',N:'ℕ',P:'ℙ',Q:'ℚ',R:'ℝ',Z:'ℤ'});
+M.sans=rangeMap(0x1D5A0,0x1D5BA,0x1D7E2);
+M.sansBold=rangeMap(0x1D5D4,0x1D5EE,0x1D7EC);
+M.sansItalic=rangeMap(0x1D608,0x1D622);
+M.sansBoldItalic=rangeMap(0x1D63C,0x1D656);
+M.mono=rangeMap(0x1D670,0x1D68A,0x1D7F6);
+M.circled=(function(){var m={},i;for(i=0;i<26;i++){m[String.fromCharCode(65+i)]=String.fromCodePoint(0x24B6+i);m[String.fromCharCode(97+i)]=String.fromCodePoint(0x24D0+i);}m['0']='⓪';for(i=1;i<=9;i++)m[String(i)]=String.fromCodePoint(0x2460+i-1);return m;})();
+M.negCircled=(function(){var m={},i;for(i=0;i<26;i++){m[String.fromCharCode(65+i)]=String.fromCodePoint(0x1F150+i);m[String.fromCharCode(97+i)]=String.fromCodePoint(0x1F150+i);}return m;})();
+M.squared=(function(){var m={},i;for(i=0;i<26;i++){m[String.fromCharCode(65+i)]=String.fromCodePoint(0x1F130+i);m[String.fromCharCode(97+i)]=String.fromCodePoint(0x1F130+i);}return m;})();
+M.fullwidth=(function(){var m={},i;for(i=0;i<26;i++){m[String.fromCharCode(65+i)]=String.fromCodePoint(0xFF21+i);m[String.fromCharCode(97+i)]=String.fromCodePoint(0xFF41+i);}for(i=0;i<10;i++)m[String(i)]=String.fromCodePoint(0xFF10+i);m[' ']='　';return m;})();
+M.smallCaps=(function(){var up='ABCDEFGHIJKLMNOPQRSTUVWXYZ',sc='ᴀʙᴄᴅᴇꜰɢʜɪᴊᴋʟᴍɴᴏᴘQʀꜱᴛᴜᴠᴡxʏᴢ',m={},i;for(i=0;i<26;i++){m[up[i]]=sc[i];m[up[i].toLowerCase()]=sc[i];}return m;})();
+M.superscript=(function(){var a='abcdefghijklmnopqrstuvwxyz',b='ᵃᵇᶜᵈᵉᶠᵍʰⁱʲᵏˡᵐⁿᵒᵖqʳˢᵗᵘᵛʷˣʸᶻ',d='0123456789',e='⁰¹²³⁴⁵⁶⁷⁸⁹',m={},i;for(i=0;i<26;i++){m[a[i]]=b[i];m[a[i].toUpperCase()]=b[i];}for(i=0;i<10;i++)m[d[i]]=e[i];m['+']='⁺';m['-']='⁻';m['=']='⁼';m['(']='⁽';m[')']='⁾';return m;})();
+M.subscript=(function(){var a='abcdefghijklmnopqrstuvwxyz',b='ₐᵦ𝒸𝒹ₑ𝒻𝓰ₕᵢⱼₖₗₘₙₒₚᵩᵣₛₜᵤᵥᵥₓᵧ𝓏',d='0123456789',e='₀₁₂₃₄₅₆₇₈₉',m={},i;for(i=0;i<26;i++){m[a[i]]=b[i];m[a[i].toUpperCase()]=b[i];}for(i=0;i<10;i++)m[d[i]]=e[i];m['+']='₊';m['-']='₋';m['=']='₌';m['(']='₍';m[')']='₎';return m;})();
+M.upside=(function(){var a='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!?()[]{}<>',b='ɐqɔpǝɟƃɥᴉɾʞlɯuodbɹsʇnʌʍxʎz∀ꓭƆᗡƎℲ⅁HIſꓘ˥WNOԀΌᴚS⊥∩ΛMX⅄Z0ƖᄅƐㄣϛ9ㄥ86˙\'¡¿)(][}{><',m={},i;for(i=0;i<a.length;i++)m[a[i]]=b[i]||a[i];return m;})();
+function upsideDown(t){var a=[],i;for(i=t.length-1;i>=0;i--)a.push(M.upside[t[i]]||t[i]);return a.join('');}
+
+/* ============ 5) DECOR STYLES ============ */
+var FRAMES=[['ياباني','「{t}」'],['مزدوج','『{t}』'],['سميك','【{t}】'],['نجمة مضيئة','★彡 {t} 彡★'],['بريق','✦ {t} ✦'],['وميض','✧･ﾟ: *{t}*:･ﾟ✧'],['شرائط','▁ ▂ ▄ {t} ▄ ▂ ▁'],['خط مزدوج','═══ {t} ═══'],['تدرّج','░▒▓ {t} ▓▒░'],['قلب','♡ {t} ♡'],['فارسية','꧁ {t} ꧂'],['تيبتي','༺ {t} ༻'],['برق','⚡ {t} ⚡'],['زهرة','✿ {t} ✿'],['برعم','❀ {t} ❀'],['نجوم صغيرة','⋆｡°✩ {t} ✩°｡⋆'],['سهم','▸ {t} ◂'],['دائرة','⟡ {t} ⟡'],['فاصل فني','✦•┈๑⋅⋯ {t} ⋯⋅๑┈•✦'],['كاواي','୨୧ {t} ୨୧'],['قوس ناعم','꒰ {t} ꒱'],['سهم طويل','╰┈➤ {t}'],['مؤشر','➤ {t} ⬅'],['ظل','░ {t} ░'],['زخرفة عربية','۞ {t} ۞'],['قوس قرآني','﴾ {t} ﴿'],['تاج','♛ {t} ♛'],['زنبقة','⚜ {t} ⚜'],['نجمة ذهبية','✩ {t} ✩'],['إطار ملكي','╔══ {t} ══╗']];
+var AROUND=[['نجمة','✦{t}✦'],['نجمة مصمتة','★{t}★'],['قلب','♥{t}♥'],['زهرة','✿{t}✿'],['برعم','❀{t}❀'],['برق','⚡{t}⚡'],['نار','🔥{t}🔥'],['ألماس','💎{t}💎'],['بريق','✨{t}✨'],['وردة','🌹{t}🌹'],['نجمة صفراء','⭐{t}⭐'],['فراشة','🦋{t}🦋'],['تاج','👑{t}👑'],['دوامة','💫{t}💫'],['شريطة','🎀{t}🎀'],['برسيم','☘{t}☘'],['وميض','✧{t}✧'],['سهم قلب','❥{t}❥'],['سهم زخرفي','➳{t}➳'],['نوتة','♪{t}♪']];
+var STYLES=[
+ {n:'عادي',f:function(t){return t;}},
+ {n:'𝐁𝐨𝐥𝐝 — عريض',f:function(t){return tr(t,M.bold);}},
+ {n:'𝐼𝑡𝑎𝑙𝑖𝑐 — مائل',f:function(t){return tr(t,M.italic);}},
+ {n:'𝑩𝒐𝒍𝒅 𝑰𝒕𝒂𝒍𝒊𝒄',f:function(t){return tr(t,M.boldItalic);}},
+ {n:'𝓢𝓬𝓻𝓲𝓹𝓽 — خط اليد',f:function(t){return tr(t,M.script);}},
+ {n:'𝓑𝓸𝓵𝓭 𝓢𝓬𝓻𝓲𝓹𝓽',f:function(t){return tr(t,M.boldScript);}},
+ {n:'𝔉𝔯𝔞𝔨𝔱𝔲𝔯 — قوطي',f:function(t){return tr(t,M.fraktur);}},
+ {n:'𝕭𝖔𝖑𝖉 𝕱𝖗𝖆𝖐𝖙𝖚𝖗',f:function(t){return tr(t,M.boldFraktur);}},
+ {n:'𝔻𝕠𝕦𝕓𝕝𝕖 𝕊𝕥𝕣𝕦𝕔𝕜𝕖',f:function(t){return tr(t,M.double);}},
+ {n:'𝖲𝖺𝗇𝗌 — بسيط',f:function(t){return tr(t,M.sans);}},
+ {n:'𝗦𝗮𝗻𝘀 𝗕𝗼𝗹𝗱',f:function(t){return tr(t,M.sansBold);}},
+ {n:'𝘚𝘢𝘯𝘴 𝘐𝘵𝘢𝘭𝘪𝘤',f:function(t){return tr(t,M.sansItalic);}},
+ {n:'𝙎𝙖𝙣𝙨 𝘽𝙤𝙡𝙙 𝙄𝙩𝙖𝙡𝙞𝙘',f:function(t){return tr(t,M.sansBoldItalic);}},
+ {n:'𝙼𝚘𝚗𝚘𝚜𝚙𝚊𝚌𝚎 — آلة كاتبة',f:function(t){return tr(t,M.mono);}},
+ {n:'Ⓒⓘⓡⓒⓛⓔⓓ — دوائر',f:function(t){return tr(t,M.circled);}},
+ {n:'🅐🅑🅒 — دوائر سوداء',f:function(t){return tr(t,M.negCircled);}},
+ {n:'🄰🄱🄲 — مربعات',f:function(t){return tr(t,M.squared);}},
+ {n:'ｆｕｌｌｗｉｄｔｈ — عريض كامل',f:function(t){return tr(t,M.fullwidth);}},
+ {n:'Sᴍᴀʟʟ Cᴀᴘs — حروف صغيرة',f:function(t){return tr(t,M.smallCaps);}},
+ {n:'ˢᵘᵖᵉʳˢᶜʳⁱᵖᵗ — أعلى',f:function(t){return tr(t,M.superscript);}},
+ {n:'ₛᵤᵦₛcᵣᵢₚₜ — أسفل',f:function(t){return tr(t,M.subscript);}},
+ {n:'ǝpᴉsd∩ — مقلوب',f:function(t){return upsideDown(t);}},
+ {n:'تـطـويـل عربي',f:function(t){return t.split('').join('ـ');}},
+ {n:'تشكيل عربي',f:function(t){return t.split('').map(function(c){return /[ء-ي]/.test(c)?c+'َ':c;}).join('');}},
+ {n:'زخرفة عربية ۞',f:function(t){return '۞ '+t.split('').join('ـ')+' ۞';}},
+ {n:'قوس قرآني ﴾ ﴿',f:function(t){return '﴾ '+t+' ﴿';}},
+ {n:'فاصل عربي ؞',f:function(t){return t.split('').join('؞');}},
+ {n:'نقاط عربية ٭',f:function(t){return t.split('').join('٭');}}
+];
+FRAMES.forEach(function(x){STYLES.push({n:'إطار · '+x[0],f:function(t){return x[1].replace('{t}',t);}});});
+AROUND.forEach(function(x){STYLES.push({n:'رموز · '+x[0],f:function(t){return x[1].replace('{t}',t);}});});
+
+/* ============ 6) DECOR RENDER ============ */
+var decorInput=document.getElementById('decorInput'),stylesGrid=document.getElementById('stylesGrid');
+function renderStyles(){
+  var raw=decorInput.value.trim(), text=raw||'نصّك هنا';
+  stylesGrid.innerHTML='';
+  var frag=document.createDocumentFragment();
+  STYLES.forEach(function(s,i){
+    var out=s.f(text);
+    var card=document.createElement('div'); card.className='card style-card';
+    var name=document.createElement('div'); name.className='style-name';
+    name.innerHTML='<b>'+(i+1)+'</b> '+s.n;
+    if(s.f('A')!=='A' && !/[A-Za-z0-9]/.test(text)){
+      var tg=document.createElement('span'); tg.className='tag-lat'; tg.textContent='لاتيني'; name.appendChild(tg);
+    }
+    var prev=document.createElement('div'); prev.className='style-preview'; prev.dir='auto'; prev.textContent=out;
+    var btn=document.createElement('button'); btn.className='copy-btn'; btn.textContent='📋 نسخ';
+    btn.addEventListener('click',function(){copyText(out);});
+    card.appendChild(name); card.appendChild(prev); card.appendChild(btn);
+    card.addEventListener('dblclick',function(){copyText(out);});
+    frag.appendChild(card);
+  });
+  stylesGrid.appendChild(frag);
+}
+decorInput.addEventListener('input',function(){clearTimeout(decorInput._t);decorInput._t=setTimeout(renderStyles,90);});
+document.getElementById('quickChips').addEventListener('click',function(e){
+  var b=e.target.closest('.chip'); if(!b)return;
+  decorInput.value=b.dataset.q; renderStyles();
+});
+renderStyles();
+
+/* ============ 7) TABS ============ */
+function switchTab(name){
+  var i,ps=document.querySelectorAll('.panel'),ts=document.querySelectorAll('.tab'),bs=document.querySelectorAll('.bn');
+  for(i=0;i<ps.length;i++)ps[i].classList.toggle('active',ps[i].id==='panel-'+name);
+  for(i=0;i<ts.length;i++)ts[i].classList.toggle('active',ts[i].dataset.tab===name);
+  for(i=0;i<bs.length;i++)bs[i].classList.toggle('active',bs[i].dataset.tab===name);
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(name==='stickers')ensureStickers();
+  if(name==='symbols')ensureSymbols();
+}
+document.getElementById('tabs').addEventListener('click',function(e){var t=e.target.closest('.tab');if(t)switchTab(t.dataset.tab);});
+document.getElementById('bnav').addEventListener('click',function(e){var t=e.target.closest('.bn');if(t)switchTab(t.dataset.tab);});
+
+/* ============ 8) DATA GENERATION (programmatic) ============ */
+function rng(a,b){
+  var o=[],c,ch;
+  for(c=a;c<=b;c++){
+    ch=String.fromCodePoint(c);
+    if(/[\u0000-\u001F\u007F\u00A0\u2000-\u200F\u2028-\u202F\u205F-\u206F\uFEFF]/.test(ch))continue;
+    o.push(ch);
+  }
+  return o;
+}
+function dedupe(cats){
+  var seen={},out=[],i,j,a;
+  for(i=0;i<cats.length;i++){
+    a=[];
+    for(j=0;j<cats[i][1].length;j++){
+      var ch=cats[i][1][j];
+      if(!ch||seen[ch])continue;
+      seen[ch]=1; a.push(ch);
+    }
+    out.push([cats[i][0],a]);
+  }
+  return out;
+}
+function trimTo(cats,target){
+  var idx=[],out=[],i,count=0,prog;
+  for(i=0;i<cats.length;i++){idx.push(0);out.push([]);}
+  while(count<target){
+    prog=false;
+    for(i=0;i<cats.length;i++){
+      if(idx[i]<cats[i][1].length&&count<target){
+        out[i].push(cats[i][1][idx[i]]); idx[i]++; count++; prog=true;
+      }
+    }
+    if(!prog)break;
+  }
+  var res=[];
+  for(i=0;i<cats.length;i++)res.push([cats[i][0],out[i]]);
+  return res;
+}
+
+/* --- symbols --- */
+var SYM_RAW=[
+ ['أسهم',rng(0x2190,0x21FF).concat(rng(0x27F0,0x27FF),rng(0x2900,0x293F),rng(0x2B00,0x2B0F))],
+ ['نجوم',rng(0x2700,0x27BF).concat(rng(0x2B50,0x2B55))],
+ ['أشكال هندسية',rng(0x25A0,0x25FF).concat(rng(0x2B1A,0x2B2F))],
+ ['خطوط',rng(0x2500,0x257F).concat(rng(0x2B10,0x2B19))],
+ ['أقواس','【】〖〗〘〙〚〛「」『』〈〉《》〔〕﴾﴿❨❩❪❫❬❭❮❯❰❱❲❳❴❵⟦⟧⟨⟩⟪⟫⦃⦄⦅⦆⦇⦈⦉⦊⦋⦌⦍⦎⦏⦐⦑⦒⦓⦔⦕⦖⦗⦘⧼⧽'.split('')],
+ ['عملات',rng(0x20A0,0x20BF).concat('$¢£¤¥₪₫€₭₮₯₰₱₲₳₴₵₶₷₸₹₺₻₼₽₾₿'.split(''))],
+ ['رياضيات',rng(0x2200,0x22FF).concat(rng(0x2A00,0x2A6F))],
+ ['تقنية',rng(0x2300,0x23FF)],
+ ['دينية وزخرفية','☪☸☯☮☭✡✝☦☧☨☩☫☬卍卐࿕࿖࿗࿘♰♱♲♳♴♵♶♷♸♹♺♻♼♽⚕⚖⚗⚘⚙⚚⚛⚜⚝⚞⚟⚠⚡⚢⚣⚤⚥⚦⚧⚨⚩⚪⚫⚬⚭⚮⚯⚰⚱⚲⚳⚴⚵⚶⚷⚸⚹⚺⚻⚼⚽⚾⚿⛀⛁⛂⛃⛄⛅⛆⛇⛈⛉⛊⛋⛌⛍⛎⛏⛐⛑⛒⛓⛔⛕⛖⛗⛘⛙⛚⛛⛜⛝⛞⛟⛠⛡⛢⛣⛤⛥⛦⛧⛨⛩⛪⛫⛬⛭⛮⛯⛰⛱⛲⛳⛴⛵⛶⛷⛸⛹⛺⛻⛼⛽⛾⛿'.split('')],
+ ['إطارات فنية','╔╗╚╝║═╠╣╦╩╬┌┐└┘│─├┤┬┴┼╭╮╰╯╱╲╳▁▂▃▄▅▆▇█▉▊▋▌▍▎▏░▒▓▔▕▖▗▘▙▚▛▜▝▞▟'.split('')],
+ ['رموز عربية','﷽ﷺﷻ﷼؏؎؊۞۩۝٭۔܀܁܂࿕࿖࿗࿘'.split('')],
+ ['أرقام ودوائر',rng(0x2460,0x24FF)],
+ ['حروف خاصة',rng(0x2100,0x214F)],
+ ['كسور وأرقام',rng(0x2150,0x218F)],
+ ['برايل ونقاط',rng(0x2800,0x28FF)]
+];
+var SYMBOLS=trimTo(dedupe(SYM_RAW),1000);
+
+/* --- stickers --- */
+var EMO={
+'وجوه':'😀😃😄😁😆😅🤣😂🙂🙃😉😊😇🥰😍🤩😘😗😚😙🥲😋😛😜🤪😝🤑🤗🤭🤫🤔🤐🤨😐😑😶😏😒🙄😬🤥😌😔😪🤤😴😷🤒🤕🤢🤮🤧🥵🥶🥴😵🤯🤠🥳😎🤓🧐😕😟🙁😮😯😲😳🥺😦😧😨😰😥😢😭😱😖😣😞😓😩😫🥱😤😡😠🤬😈👿💀💩🤡👻👽🤖😺😸😹😻😼😽🙀😿😾🫠🫡🫢🫣🫤🥹🫨',
+'أيادي':'👋🤚🖐️✋🖖👌🤌🤏✌️🤞🫰🤟🤘🤙👈👉👆🖕👇☝️🫵👍👎✊👊🤛🤜👏🙌🫶👐🤲🤝🙏✍️💅🤳💪🦾🦿🦵🦶👂🦻👃🧠🫀🫁🦷🦴👀👁️👅👄🫦🫸🫷🫲🫱🫳🫴',
+'قلوب':'❤️🧡💛💚💙💜🖤🤍🤎💔❣️💕💞💓💗💖💘💝💟♥️♡❤💙💚💛🧡💜🖤🤍💓💗💖💘💝💞💕❣💔❤️‍🔥❤️‍🩹🫀💌',
+'حب':'💘💝💖💗💓💞💕💟❣️💔❤️‍🔥❤️‍🩹💌💋👩‍❤️‍👨👨‍❤️‍👨👩‍❤️‍👩💑💏🌹🥀💐🎁💍💎🫶🤍💜💙💚💛🧡❤️😍🥰😘',
+'حيوانات':'🐶🐱🐭🐹🐰🦊🐻🐼🐨🐯🦁🐮🐷🐸🐵🙈🙉🙊🐒🐔🐧🐦🐤🐣🐥🦆🦅🦉🦇🐺🐗🐴🦄🐝🐛🦋🐌🐞🐜🪰🪱🦗🕷️🕸️🦂🐢🐍🦎🦖🦕🐙🦑🦐🦞🦀🐡🐠🐟🐬🐳🐋🦈🐊🐅🐆🦓🦍🦧🐘🦛🦏🐪🐫🦒🦘🐃🐂🐄🐎🐖🐏🐑🦙🐐🦌🐕🐩🦮🐈🐓🦃🦚🦜🦢🦩🕊️🐇🦝🦨🦡🦦🦥🐁🐀🐿️🦔🦭🦫🦤🪿🫎🫏🐕‍🦺🐈‍⬛🪶',
+'طبيعة':'🌵🎄🌲🌳🌴🌱🌿☘️🍀🎍🎋🍃🍂🍁🍄🐚🌾💐🌷🌹🥀🌺🌸🌼🌻🌞🌝🌚🌛🌜🌙🌘🌗🌖🌕🌔🌓🌒🌑🌎🌍🌏🪐💫⭐🌟✨⚡☄️💥🔥🌪️🌈☀️🌤️⛅🌥️☁️🌦️🌧️⛈️🌩️🌨️❄️☃️⛄🌬️💨💧💦☔☂️🌊🌫️🪴🪵🪨🪸🪼🪻',
+'طعام':'🍏🍎🍐🍊🍋🍌🍉🍇🍓🫐🍈🍒🍑🥭🍍🥥🥝🍅🍆🥑🥦🥬🥒🌶️🫑🌽🥕🫒🧄🧅🥔🍠🥐🥯🍞🥖🥨🧀🥚🍳🧈🥞🧇🥓🥩🍗🍖🦴🌭🍔🍟🍕🫓🥪🥙🧆🌮🌯🫔🥗🥘🫕🥫🍝🍜🍲🍛🍣🍱🥟🍤🍙🍚🍘🍥🥠🥮🍢🍡🍧🍨🍦🥧🧁🍰🎂🍮🍭🍬🍫🍿🍩🍪🌰🥜🍯🥛🍼☕🍵🧃🥤🧋🍶🍺🍻🥂🍷🥃🍸🍹🧉🍾🧊🫖',
+'احتفال':'🎉🎊🎈🎂🎁🎀🎗️🎟️🎫🏆🥇🥈🥉🏅🎖️🎯🎳🎮🕹️🎲🎰🧩🎨🎭🎪🎬🎤🎧🎼🎹🥁🎷🎺🎸🪕🎻🎆🎇🧨✨🪄🎃🎄🎋🎍🎑🧧🪅🪩🎏',
+'حزين':'😢😭😞😔😟😕🙁☹️😣😖😫😩🥺😦😧😨😰😥😓😪😮‍💨🫠💔🥀🖤🌧️⛈️😿😾😵‍💫😵🤕🤒😷',
+'غاضب':'😠😡🤬😤😾👿💢🗯️💥🔥🤯😖😣😫😩🙄😒😑',
+'ألعاب':'🎮🕹️🎲🎯🎳🎰🧩🃏🀄🎴♠️♥️♦️♣️🕎🎪🎠🎡🎢🏹🥊🥋🏓🏸🏀⚽⚾🎾🏐🏈🏉🎱🪀🪁🧸🪆🎨🖌️🖍️✏️',
+'رياضة':'⚽🏀🏈⚾🥎🎾🏐🏉🥏🎱🏓🏸🏒🏑🥍🏏🪃🥅⛳🪁🏹🎣🤿🥊🥋🎽🛹🛼🛷🥌🎿⛷️🏂🪂🏋️🤼🤸⛹️🤺🤾🏌️🏇🧘🏄🏊🤽🚣🧗🚵🚴🏆🥇🥈🥉🏅🎖️',
+'سفر':'✈️🛫🛬🛩️💺🚀🛸🚁🛶⛵🚤🛥️🛳️⛴️🚢🚂🚃🚄🚅🚆🚇🚈🚉🚊🚝🚞🚋🚌🚍🚎🚐🚑🚒🚓🚔🚕🚖🚗🚘🚙🚚🚛🚜🏎️🏍️🛵🚲🛴🛹🛼🚏🛣️🛤️🗺️🗿🗽🗼🏰🏯🏟️🎡🎢⛲⛱️🏖️🏝️🏜️🏔️⛰️🌋🗻🏕️⛺🏠🏡🏘️🏚️🏗️🏭🏢🏬🏣🏤🏥🏦🏨🏩🏪🏫🏛️⛪🕌🕍🛕🕋⛩️',
+'ملابس':'👓🕶️🥼🦺👔👕👖🧣🧤🧥🧦👗👘🥻🩱🩲🩳👙👚👛👜👝🛍️🎒🩴👞👟🥾🥿👠👡🩰👢👑👒🎩🎓🧢🪖⛑️📿💄💍💎',
+'موسيقى':'🎵🎶🎼🎤🎧🎷🎸🎹🎺🎻🥁🪘📻🔊🔉🔈🔇📢📣📯',
+'مال':'💰💴💵💶💷💸💳🪙🧾💹📈📉🏦💲💱🤑💎🏧📊',
+'أشياء':'💡🔦🕯️🪔🧯🛢️⚖️🪜🧰🪛🔧🔨⚒️🛠️⛏️🪚🔩⚙️🪤🧱⛓️🧲🔫💣🧨🪓🔪🗡️⚔️🛡️🚬⚰️🪦⚱️🏺🔮📿🧿🪬💈⚗️🔭🔬🕳️🩹🩺🩻🩼💊💉🩸🧬🦠🧫🧪🌡️🧹🪠🧺🧻🚽🚰🚿🛁🛀🧼🪥🪒🧽🪣🧴🛎️🔑🗝️🚪🪑🛋️🛏️🛌🖼️🪞🪟🛒📩📨📧📥📤📦🏷️🪧📪📫📬📭📮📜📃📄📑🗒️🗓️📆📅🗑️📇🗃️🗳️🗄️📋📁📂🗂️🗞️📰📓📔📒📕📗📘📙📚📖🔖🧷🔗📎🖇️📐📏🧮📌📍✂️🖊️🖋️✒️🖌️🖍️📝✏️🔍🔎🔏🔐🔒🔓',
+'متنوع':'🔥💯✅❌⚠️❓❗💡🔔📌📎🔗🔒🔓🔑🛡️⚙️🧲🔮🎁🎀🧿🪬♻️⚡💤💬🗯️💭🔆🔅🌐🕐⏰⌛⏳📅📆🗓️📍🧭🎵🎶🔊🔇📢📣📯🔕♈♉♊♋♌♍♎♏♐♑♒♓⛎🏳️🏴🏁🚩🏳️‍🌈🏴‍☠️0️⃣1️⃣2️⃣3️⃣4️⃣5️⃣6️⃣7️⃣8️⃣9️⃣🔟#️⃣*️⃣'
+};
+var KAO={
+'وجوه':['ʕ•ᴥ•ʔ','(◕‿◕)','(｡◕‿◕｡)','( ͡° ͜ʖ ͡°)','(•‿•)','(◔‿◔)','(◕ᴗ◕✿)','(✿◠‿◠)','(๑˃̵ᴗ˂̵)','(≧◡≦)','(＾▽＾)','(^_^)','(^-^)','(o^▽^o)','(⌒▽⌒)','(￣▽￣)','(°ロ°)','(☞ﾟヮﾟ)☞','☜(ﾟヮﾟ☜)','(•_•)','(⌐■_■)','ಠ_ಠ','ಠ‿ಠ','(¬‿¬)','( ˘ ³˘)♥','(っ˘ω˘ς )','(´｡• ᵕ •｡`)','(´･ᴗ･ ` )','( ˘▽˘)っ♨','(๑•̀ㅂ•́)و✧','(ง •̀_•́)ง','ᕦ(ò_óˇ)ᕤ','(•̀ᴗ•́)و','( ﾟ▽ﾟ)/','ヽ(•‿•)ノ','(￣ω￣)','(￣ヘ￣)','(・_・;)','(°ー°〃)','(＠_＠;)','(⊙_⊙)','(O_O)','(o_O)','(?_?)','(¬_¬)','(ー_ー)!!','(；一_一)','(＃￣ω￣)','(>_<)','(>﹏<)','(T_T)','(;_;)','(╯︵╰,)','(っ- ‸ - ς)','(´-ω-`)','(´。＿。｀)','(ᵔᴥᵔ)','(◍•ᴗ•◍)','(๑>ᴗ<๑)','(✧ω✧)','(☆▽☆)','(☉_☉)','(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧','(づ｡◕‿‿◕｡)づ','٩(◕‿◕)۶','(ノ^_^)ノ','(ﾉ´ヮ`)ﾉ*: ･ﾟ','(๑˘︶˘๑)','(◡‿◡✿)','(◕‿◕✿)','(◠‿◠✿)','(◜‿◝)♡','(๑•́ ₃ •̀๑)','(๑´ㅂ`๑)','(๑ᵕ⌓ᵕ̤)','(•ө•)♡','(´,,•ω•,,)♡','(灬º‿º灬)♡','(๑♡⌓♡๑)','(◍•ᴗ•◍)❤','(づ￣ ³￣)づ','(っ˘з(˘⌣˘ )','(´ε｀ )♡','(๑>؂<๑)','( ˶ˆ ᗜ ˆ˵ )','(๑˃ᴗ˂)ﻭ','(๑•̀ㅁ•́๑)✧',"(ง'̀-'́)ง",'(๑•̀ㅂ•́)ง','ᕙ(⇀‸↼‶)ᕗ','(☞ﾟ∀ﾟ)☞','☜(ﾟ∀ﾟ☜)','(ﾉ≧∀≦)ﾉ','(๑˃̵ᴗ˂̵)و','(•̀ᴗ•́)و ̑̑','٩(ˊᗜˋ*)و','٩(๑❛ᴗ❛๑)۶','ヽ(°〇°)ﾉ','ヽ(￣ω￣(￣ω￣〃)ゝ','(¯`·._.·(¯`·._.·','·._.·´¯)·._.·´¯)'],
+'حزين':['(╥﹏╥)','(｡•́︿•̀｡)','(っ˘̩╭╮˘̩)っ','(ノ_<。)','(´；ω；`)','(个_个)','(ᗒᗣᗕ)՞','(ಥ﹏ಥ)','(｡╯︵╰｡)','(T⌓T)','(｡ŏ﹏ŏ)','(｡T ω T｡)','(╥_╥)','( ˃̣̣̥⌓˂̣̣̥ )','(｡╯3╰｡)','(´；д；`)','(｡•́ ︵ •̀｡)'],
+'غاضب':['(╬ Ò﹏Ó)','(ノಠ益ಠ)ノ彡┻━┻','(╯°□°）╯︵ ┻━┻','┬─┬ノ( º _ ºノ)','(҂ `з´ )','(๑•̀д•́๑)','(＃`Д´)','(‡▼益▼)','(҂◡_◡)','(•̀へ •́ ╮ )','(凸ಠ益ಠ)凸','(ノ°益°)ノ','(҂`_´)','(｀Д´*)','(＃￣0￣)','(￣^￣)'],
+'حب':['(♥ω♥*)','(｡♥‿♥｡)','(´,,•ω•,,)♡','(๑♡⌓♡๑)','(◍•ᴗ•◍)❤','(づ￣ ³￣)づ','(っ˘з(˘⌣˘ )','( ˘ ³˘)♥','(´ε｀ )♡','(๑>؂<๑)','(灬º‿º灬)♡','(•ө•)♡','(◜‿◝)♡','(◕‿◕)♡','(◠‿◠)♡','(◡‿◡)♡','(´｡• ᵕ •｡`) ♡','(๑˘︶˘๑)♡','(◍•ᴗ•◍)♡','(๑>ᴗ<๑)♡','(✿◠‿◠)♡','(◕ᴗ◕✿)♡','(◔‿◔)♡','(•‿•)♡','(◡‿◡✿)♡','(◠‿◠✿)♡','(◕‿◕✿)♡','(◜‿◝)❤','(๑♡ω♡๑)','(´♡‿♡`)'],
+'احتفال':['\\(^o^)/','ヽ(^o^)ノ','(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧','(ノ^_^)ノ','(ﾉ´ヮ`)ﾉ*: ･ﾟ','٩(◕‿◕)۶','(๑˃ᴗ˂)ﻭ','ヽ(•‿•)ノ','(ﾉ≧∀≦)ﾉ','٩(ˊᗜˋ*)و','٩(๑❛ᴗ❛๑)۶','ヽ(°〇°)ﾉ','(๑>ᴗ<๑)','(✧ω✧)','(☆▽☆)','(☞ﾟヮﾟ)☞','☜(ﾟヮﾟ☜)','(•̀ᴗ•́)و','(๑•̀ㅂ•́)و✧','ᕦ(ò_óˇ)ᕤ','(ง •̀_•́)ง','( ﾟ▽ﾟ)/','(＾▽＾)','(⌒▽⌒)','(o^▽^o)','(≧◡≦)','(๑˃̵ᴗ˂̵)','(๑˃̵ᴗ˂̵)و','(•̀ᴗ•́)و ̑̑','ヽ(￣ω￣(￣ω￣〃)ゝ']
+};
+var ST_ORDER=['وجوه','أيادي','قلوب','حب','حيوانات','طبيعة','طعام','احتفال','حزين','غاضب','ألعاب','رياضة','سفر','ملابس','موسيقى','مال','أشياء','متنوع'];
+var ST_RAW=[];
+ST_ORDER.forEach(function(n){
+  var arr=[],i;
+  if(EMO[n]){var e=Array.from(EMO[n]);for(i=0;i<e.length;i++)arr.push(e[i]);}
+  if(KAO[n]){for(i=0;i<KAO[n].length;i++)arr.push(KAO[n][i]);}
+  ST_RAW.push([n,arr]);
+});
+var STICKERS=trimTo(dedupe(ST_RAW),1000);
+
+/* ============ 9) COLLECTION RENDERER (lazy) ============ */
+function buildCollection(cfg){
+  var grid=document.getElementById(cfg.gridId),catsEl=document.getElementById(cfg.catsId),
+      searchEl=document.getElementById(cfg.searchId),moreEl=document.getElementById(cfg.moreId),
+      shownEl=document.getElementById(cfg.shownId),data=cfg.data,isKao=cfg.isKao;
+  var all=[],i,j;
+  for(i=0;i<data.length;i++)for(j=0;j<data[i][1].length;j++)all.push({ch:data[i][1][j],cat:data[i][0]});
+  var activeCat='الكل',query='',filtered=all,rendered=0,built=false,CHUNK=120;
+
+  var cats=['الكل'];
+  for(i=0;i<data.length;i++)cats.push(data[i][0]);
+  catsEl.innerHTML='';
+  cats.forEach(function(c){
+    var b=document.createElement('button');
+    b.className='chip'+(c==='الكل'?' active':'');
+    var cnt=c==='الكل'?all.length:(function(){for(var k=0;k<data.length;k++)if(data[k][0]===c)return data[k][1].length;return 0;})();
+    b.textContent=c+' ('+cnt+')';
+    b.dataset.cat=c;
+    b.addEventListener('click',function(){
+      activeCat=c;
+      var cs=catsEl.querySelectorAll('.chip');
+      for(var k=0;k<cs.length;k++)cs[k].classList.toggle('active',cs[k].dataset.cat===c);
+      applyFilter();
+    });
+    catsEl.appendChild(b);
+  });
+
+  function applyFilter(){
+    var q=query.trim().toLowerCase();
+    filtered=all.filter(function(it){
+      if(activeCat!=='الكل'&&it.cat!==activeCat)return false;
+      if(!q)return true;
+      return it.ch.toLowerCase().indexOf(q)>-1||it.cat.toLowerCase().indexOf(q)>-1;
+    });
+    grid.innerHTML=''; rendered=0; renderChunk();
+    shownEl.textContent='معروض '+rendered+' من '+filtered.length;
+  }
+  function makeCell(it){
+    var d=document.createElement('div');
+    d.className='cell'; d.title=it.ch+' — '+it.cat;
+    if(isKao&&it.ch.length>3){
+      var s=document.createElement('span'); s.className='kao'; s.textContent=it.ch; d.appendChild(s);
+    } else d.textContent=it.ch;
+    d.addEventListener('click',function(){
+      copyText(it.ch);
+      d.classList.remove('copied'); void d.offsetWidth; d.classList.add('copied');
+    });
+    return d;
+  }
+  function renderChunk(){
+    if(rendered>=filtered.length){updateMore();return;}
+    var frag=document.createDocumentFragment(),end=Math.min(rendered+CHUNK,filtered.length),k;
+    for(k=rendered;k<end;k++)frag.appendChild(makeCell(filtered[k]));
+    grid.appendChild(frag); rendered=end;
+    shownEl.textContent='معروض '+rendered+' من '+filtered.length;
+    updateMore();
+  }
+  function updateMore(){
+    moreEl.innerHTML='';
+    if(rendered<filtered.length){
+      var b=document.createElement('button');
+      b.className='more-btn';
+      b.textContent='عرض المزيد ('+(filtered.length-rendered)+' متبقٍ)';
+      b.addEventListener('click',renderChunk);
+      moreEl.appendChild(b);
+    } else if(filtered.length===0){
+      var e=document.createElement('div');
+      e.className='empty';
+      e.innerHTML='<span class="big">🔍</span>لا توجد نتائج مطابقة';
+      moreEl.appendChild(e);
+    }
+  }
+  searchEl.addEventListener('input',function(){
+    clearTimeout(searchEl._t);
+    searchEl._t=setTimeout(function(){query=searchEl.value;applyFilter();},110);
+  });
+  if(window.IntersectionObserver){
+    new IntersectionObserver(function(en){
+      if(en[0].isIntersecting&&rendered<filtered.length)renderChunk();
+    },{rootMargin:'400px'}).observe(moreEl);
+  }
+  return function(){ if(built)return; built=true; applyFilter(); };
+}
+var ensureStickers=buildCollection({data:STICKERS,gridId:'stickerGrid',catsId:'stickerCats',searchId:'stickerSearch',moreId:'stickerMoreWrap',shownId:'stickerShown',isKao:true});
+var ensureSymbols=buildCollection({data:SYMBOLS,gridId:'symbolGrid',catsId:'symbolCats',searchId:'symbolSearch',moreId:'symbolMoreWrap',shownId:'symbolShown',isKao:false});
+
+function total(c){var s=0,i;for(i=0;i<c.length;i++)s+=c[i][1].length;return s;}
+document.getElementById('stickerCount').textContent=total(STICKERS);
+document.getElementById('symbolCount').textContent=total(SYMBOLS);
+
+/* ============ 10) REPEAT ============ */
+var repText=document.getElementById('repText'),repCount=document.getElementById('repCount'),
+    repSep=document.getElementById('repSep'),repOut=document.getElementById('repOut'),
+    repChars=document.getElementById('repChars'),repTimes=document.getElementById('repTimes');
+function doRepeat(){
+  var txt=repText.value,n=parseInt(repCount.value,10);
+  if(isNaN(n)||n<1)n=1; if(n>5000)n=5000;
+  repCount.value=n;
+  var sep=repSep.value.replace('\\n','\n');
+  var out=new Array(n+1).join(txt+sep);
+  if(sep)out=out.slice(0,-sep.length);
+  repOut.value=out;
+  repChars.textContent=out.length.toLocaleString('en-US');
+  repTimes.textContent=n.toLocaleString('en-US');
+}
+document.getElementById('repGo').addEventListener('click',function(){doRepeat();toast('تم التكرار '+repCount.value+' مرة');});
+document.getElementById('repCopy').addEventListener('click',function(){if(!repOut.value)doRepeat();copyText(repOut.value);});
+document.getElementById('repClear').addEventListener('click',function(){repOut.value='';repChars.textContent='0';repTimes.textContent='0';});
+var reps=document.querySelectorAll('[data-rep]');
+for(var ri=0;ri<reps.length;ri++)(function(b){b.addEventListener('click',function(){repCount.value=b.dataset.rep;doRepeat();});})(reps[ri]);
+[repText,repCount,repSep].forEach(function(el){el.addEventListener('change',doRepeat);});
+doRepeat();
+
+/* ============ 11) SHORTCUT ============ */
+document.addEventListener('keydown',function(e){
+  if(e.key==='/'&&!/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)){
+    var p=document.querySelector('.panel.active'),s=p&&p.querySelector('input[type=text]');
+    if(s){e.preventDefault();s.focus();}
+  }
+});
+</script>
+</body>
+</html>
